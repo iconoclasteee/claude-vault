@@ -1,8 +1,7 @@
-
-
-## name: content-extraction
-
-description: Extracts content ideas from long-form content and organizes them into detailed, platform-specific tables. Produces ready-to-execute briefs with titles, hooks, descriptions, and key points for newsletters, social posts, and more.
+---
+name: content-extraction
+description: Extracts content ideas from long-form content and organizes them into detailed, platform-specific tables. Produces ready-to-execute briefs for newsletters, social posts (Twitter/X, LinkedIn), YouTube, and more.
+---
 
 # Content Extraction Skill
 
