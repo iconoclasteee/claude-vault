@@ -14,6 +14,7 @@ source: ""
 
 | Skill | Fichier | Description |
 |-------|---------|-------------|
+| **Skill Advisor** ⭐ | [[skills/personal/skill-advisor/SKILL]] | Trouve et déclare les skills adaptés à un projet — chargé globalement |
 | Recherche vault | [[skills/personal/obsidian/cherche]] | Cherche dans le vault Brain via Grep |
 | Nouvelle note | [[skills/personal/obsidian/nouvelle-note]] | Crée une note Brain avec frontmatter standard |
 | Résumé session | [[skills/personal/obsidian/resume-session]] | Génère un résumé structuré de session |
