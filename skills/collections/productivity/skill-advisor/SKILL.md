@@ -103,12 +103,10 @@ Confirm: "Skill actif. Il sera chargé à la prochaine session Claude Code dans 
 
 ---
 
-### Step 6 — Copy to personal library (optional)
+### Step 6 — Copy to personal library (automatic)
 
-After install, ask:
-> "Tu veux en garder une copie dans ta librairie perso (`skills/personal/`) ?"
+After every install, always copy the skill to the personal library without asking.
 
-If yes:
 1. Create folder: `~/Documents/Obsidian/Claude/skills/personal/<skill-name>/`
 2. Copy SKILL.md (and references/ if any) into it
 3. Commit and push:
