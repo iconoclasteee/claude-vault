@@ -33,31 +33,44 @@ source: ""
 | json-canvas | Fichiers .canvas valides |
 | defuddle | Extraction d'articles web en Markdown |
 
-## Collections — Catalogues de référence
+## Collections — Catalogues de référence fusionnés
 
-### awesome-claude-skills (ComposioHQ)
-`collections/awesome-claude-skills/` — 94 skills, 12 catégories
+> Organisés par domaine fonctionnel. Non chargés automatiquement — référencer le chemin complet dans CLAUDE.md du projet.
 
-| Catégorie | Skills clés |
-|-----------|-------------|
-| collaboration-pm | Git, Kanban, Linear, Meeting insights |
-| data-analysis | CSV, SQL (MySQL/Postgres), Kaggle |
-| development | AWS, Playwright, Claude Code Terminal, TDD, Git worktrees |
-| media-content | YouTube transcript, EPUB reader, ElevenLabs |
-| security | OWASP, Trail of Bits, Varlock (secrets), Web app testing |
-| utility-automation | LinkedIn, File organizer, Invoice organizer |
-| writing-research | Article extractor, Brainstorming, Content research writer |
+### development/ — Dev, Ingénierie, Sécurité
+- `dev-tools/` — 21 skills : AWS, Azure DevOps, Playwright, Claude Code Terminal, TDD, Git worktrees, UI/UX guide
+- `security/` — 8 skills : OWASP, Trail of Bits, Varlock (secrets), Web app testing, FFuf
+- `engineering/` — 19 skills : workflows ingénierie (claude-skills-main)
+- `engineering-team/` — 19 skills : workflows équipe ingénierie (claude-skills-main)
+- `agents/` — patterns d'agents IA
 
-### claude-skills-main (169 skills par rôle métier)
-`collections/claude-skills-main/` — Library ultra-spécialisée par rôle
+### business/ — Stratégie, Management, Finance
+- `collaboration-pm/` — 12 skills : Git, Kanban, Linear, Meeting insights, PM frameworks
+- `c-level-advisor/` — 28 skills : advisory C-suite complet
+- `product-team/` — 8 skills : product management
+- `project-management/` — 6 skills : PM frameworks
+- `business-growth/` — 4 skills : stratégie croissance
+- `finance/` — 1 skill : finance
 
-| Domaine | Description |
-|---------|-------------|
-| c-level-advisor | Advisory C-suite (34 sous-skills) |
-| engineering | Workflows ingénierie (21 skills) |
-| marketing-skill | Marketing complet (45 skills) |
-| product-team | Product management (15 skills) |
-| project-management | PM frameworks (11 skills) |
+### marketing-content/ — Marketing, Création de contenu, Médias
+- `marketing-skill/` — 40 skills : marketing complet (claude-skills-main)
+- `media-content/` — 11 skills : YouTube, EPUB, ElevenLabs, vidéo
+- `writing-research/` — 6 skills : article extractor, brainstorming, content research
+
+### data/ — Analyse de données, Recherche
+- `data-analysis/` — 10 skills : CSV, SQL (MySQL/Postgres/MSSQL), Kaggle, Octav API
+- `science-research/` — 4 skills : deep research, materials simulation
+
+### productivity/ — Productivité, Automatisation, Documents
+- `utility-automation/` — 5 skills : LinkedIn, file organizer, invoice organizer
+- `documents/` — 2 skills : extraction doc, Reveal.js presentations
+- `learning-knowledge/` — 1 skill : Ship-Learn-Next
+
+### specialized/ — Domaines spécialisés
+- `bundles/` — 5 bundles curatés : agentbay-skills, clawfu-skills, devmarketing-skills, openpaw, wondelai-skills
+- `ra-qm-team/` — 11 skills : Regulatory & Quality Management
+- `standards/` — 5 skills : standards et guidelines
+- `health-life-sciences/` — 2 skills : health ally, DNA genome analysis
 
 ### claude-code-skill-factory (Patterns & Templates)
 `collections/claude-code-skill-factory/` — 14 skills générés + exemples
@@ -68,5 +81,5 @@ Utiliser pour créer de nouveaux skills : voir `documentation/` et `claude-skill
 
 Pour utiliser un skill depuis une collection, référencer son chemin dans le CLAUDE.md du projet :
 ```
-@~/Documents/Obsidian/Claude/skills/collections/awesome-claude-skills/security/owasp/SKILL.md
+@~/Documents/Obsidian/Claude/skills/collections/development/security/owasp/SKILL.md
 ```
