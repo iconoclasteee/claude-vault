@@ -67,6 +67,12 @@ source: ""
 - `documents/` — 2 skills : extraction doc, Reveal.js presentations
 - `learning-knowledge/` — 1 skill : Ship-Learn-Next
 
+### claude-config/ — Configuration et extension de Claude Code
+- `skills/` — hook-factory, agent-factory, slash-command-factory, prompt-factory, agnix (validation), skill-improver, skill-security-auditor, designing-workflow-skills
+- `agents/` — agent-designer, self-improving-agent (+ promote)
+- `mcp/` — mcp-developer, mcp-server-builder
+- `plugins/` — plugin-authoring, codex-cli-bridge
+
 ### specialized/ — Domaines spécialisés
 - `bundles/` — 5 bundles curatés : agentbay-skills, clawfu-skills, devmarketing-skills, openpaw, wondelai-skills
 - `ra-qm-team/` — 11 skills : Regulatory & Quality Management
