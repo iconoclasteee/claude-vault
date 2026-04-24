@@ -29,8 +29,9 @@ Exemple :
 ## 🔄 Flow d'exécution
 
 1. Claude lit les instructions du fichier `log-cc.md`
-2. Claude synthétise la **conversation actuelle depuis le début** en 7 sections, dans l'ordre :
-   - **Résumé** (ton synthétique, pas "aujourd'hui")
+2. Claude synthétise la **conversation actuelle depuis le début** en 8 sections, dans l'ordre :
+   - **Objectif utilisateur** (vision cible / "pourquoi système", toujours présente)
+   - **Résumé** (ce qui a été fait dans la session, ton synthétique, pas "aujourd'hui", toujours présente)
    - **Décisions clés**
    - **Apprentissages**
    - **Problèmes + solutions**

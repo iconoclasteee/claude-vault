@@ -34,14 +34,19 @@ Scan rapide :
 - Identifie 1 à 3 notes dont le titre est sémantiquement proche du topic
 - Si aucune note pertinente trouvée, **omet complètement la section "Liens"** du fichier final (ne mets pas de "aucune note pertinente")
 
-### 3. Synthétiser la conversation en 7 sections
+### 3. Synthétiser la conversation en 8 sections
 
-**Ordre imposé** : Résumé → Décisions clés → Apprentissages → Problèmes rencontrés → À faire → Commandes importantes → Fichiers touchés.
+**Ordre imposé** : Objectif utilisateur → Résumé → Décisions clés → Apprentissages → Problèmes rencontrés → À faire → Commandes importantes → Fichiers touchés.
+
+**Sémantique des sections** :
+- **Objectif utilisateur** : le "pourquoi système" que poursuit Olivier à travers cette session — la **vision cible** ou le **résultat désiré** à terme (pas ce qu'on a fait techniquement — ça c'est "Résumé"). 2-5 phrases qui décrivent l'état du monde qu'Olivier veut atteindre. Reformule avec tes mots en t'appuyant sur ce qui a émergé de la conversation (besoins exprimés, contraintes, arbitrages faits). Exemple de style : "Avoir un second brain sur Obsidian accessible depuis Mac, VPS et iPhone ; avoir un vault Claude qui centralise les skills et permet de les découvrir/installer facilement via skill-advisor ; pouvoir journaliser les sessions Claude Code dans Brain."
+- **Résumé** : ce qui a été **fait** dans cette session précise (2-5 phrases, ton factuel, pas "Aujourd'hui")
+- Les 6 autres sections gardent leur sens habituel
 
 **Règles de style :**
 - Ton **synthétique**, factuel, professionnel
 - **Ne jamais** commencer le résumé par "Aujourd'hui"
-- Si une section n'a rien à dire, **omet-la complètement** (pas de placeholder vide)
+- Si une section n'a rien à dire, **omet-la complètement** (pas de placeholder vide). Exception : "Objectif utilisateur" et "Résumé" sont toujours présentes
 - Frontmatter obligatoire (cf. template)
 
 ### 4. Écrire le fichier
@@ -61,6 +66,9 @@ source: "session Claude Code YYYY-MM-DD HHhMM"
 ---
 
 # <topic>
+
+## Objectif utilisateur
+<2 à 5 phrases décrivant la vision cible / résultat désiré par Olivier — le "pourquoi système" de la session, pas le "quoi on a fait">
 
 ## Résumé
 <2 à 5 phrases synthétiques, ton factuel, sans commencer par "Aujourd'hui">
