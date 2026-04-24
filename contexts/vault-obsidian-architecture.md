@@ -31,7 +31,7 @@
 |-------------------|----------------------|
 | `_claude/skills/` | `.claude/skills/` |
 | `_claude/CLAUDE-global.md` | `~/.claude/CLAUDE.md` |
-| `_claude/memory/` | `~/.claude/projects/-home-ubuntu-vaultObsidian/memory/` |
+| `_claude/memory/` | `~/.claude/projects/-home-<user>-vaultObsidian/memory/` |
 
 ## Ordre de lecture des CLAUDE.md par Claude Code
 
