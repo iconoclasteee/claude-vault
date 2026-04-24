@@ -20,7 +20,7 @@ description: Archive une information en mémoire persistante — écrit à la fo
 
 2. **Écrire dans `~/.claude/memory/`** via le système memory auto standard (fichier dédié + pointeur dans `MEMORY.md`). Respecter le format frontmatter `name/description/type`.
 
-3. **Pousser dans le vault** dans `/Users/<user>/ObsidianVaults/Brain/12 Domaines/AI/` :
+3. **Pousser dans le vault** dans `~/ObsidianVaults/Brain/12 Domaines/AI/` :
    - Vérifier d'abord s'il existe déjà une note sur le sujet (`ls` + Grep) → si oui, Edit pour appender, sinon Write une nouvelle note
    - Nommage : `YYYY-MM-DD — titre-court.md`
    - Frontmatter Brain obligatoire :
