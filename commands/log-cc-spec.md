@@ -1,6 +1,6 @@
 # Spec — Slash command `/log-cc`
 
-**Status** : design validated 2026-04-24 — implementation en cours
+**Status** : implémenté 2026-04-24, évolué 2026-04-24 (ajout commit auto local + push manuel sur confirmation)
 **Auteur** : brainstorming Olivier / Claude
 
 ## 🎯 Objectif
@@ -43,10 +43,11 @@ Exemple :
    - Sinon : auto-détection = un titre synthétique de 3 à 6 mots qui capture l'action principale de la session (ex: "Setup sync vaults", "Debug cron expired token", "Refacto dossiers PARA")
 4. Claude scanne `~/ObsidianVaults/Brain/03 Notes/` et `~/ObsidianVaults/Brain/04 MOC/` pour trouver 1 à 3 notes existantes pertinentes au topic, à lier via `[[WikiLinks]]`
 5. Claude écrit le fichier dans `~/ObsidianVaults/Brain/01 Journal/Claude code/YYYY-MM-DD HHhMM — <topic>.md` (crée le dossier si absent)
-6. Claude affiche le contenu complet dans le terminal pour preview
-7. Olivier peut répondre :
-   - **"ok"** ou rien → on s'arrête
-   - **"refais plus court"**, **"enlève la section Décisions"**, **"ajoute X"** → Claude régénère et écrase le fichier
+6. **Claude commit automatiquement en local** (pas de push) sur l'hôte où le fichier a été écrit, avec le message `journal: session Claude Code YYYY-MM-DD HHhMM — <topic>`
+7. Claude affiche le contenu complet dans le terminal pour preview
+8. Olivier peut répondre :
+   - **"ok"** / **"oui"** / **"push"** / **"go"** → Claude pousse sur GitHub (`sync-vault.sh` sur VPS ; `git pull --rebase + push` sur Mac). Le cron VPS toutes les 5 min rattrape de toute façon.
+   - **"refais plus court"**, **"enlève la section Décisions"**, **"ajoute X"** → Claude régénère et écrase le fichier, **amend le commit** (`git commit -a --amend --no-edit`), réaffiche et repose la question
 
 ## 📝 Format du fichier de sortie
 
@@ -145,3 +146,9 @@ Toute nouvelle slash command doit vivre dans `~/ObsidianVaults/Claude/commands/`
 - Auto-déclenchement via hook SessionEnd → non voulu (user voulait manuel)
 - Multi-fichiers (par thème) → non voulu (une session = un fichier)
 - Intégration dans le graphe Obsidian au-delà des WikiLinks manuels → natif à Obsidian, rien à faire
+
+## 📜 Changelog
+
+- **2026-04-24** : v1 implémentée (7 étapes, synthèse + preview + régénération).
+- **2026-04-24** : v1.1 — ajout de l'étape **Objectif utilisateur** en tête de note (8 sections au total).
+- **2026-04-24** : v1.2 — le flow passe à 9 étapes : commit automatique local immédiatement après l'écriture (étape 6), push uniquement après confirmation utilisateur (étape 9). Motivation : garder un checkpoint Git sans polluer GitHub avec des drafts non validés.

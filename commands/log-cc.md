@@ -104,18 +104,50 @@ source: "session Claude Code YYYY-MM-DD HHhMM"
 - [[<Note existante 2>]] — <pourquoi pertinente>
 ```
 
-### 5. Afficher le contenu dans le terminal
+### 5. Commit automatique immédiat (pas de push)
 
-Après avoir écrit le fichier, **affiche son contenu complet** dans la conversation pour preview.
+Juste après l'écriture du fichier, commit **localement** sans push, sur l'hôte où le fichier a été écrit :
 
-### 6. Attendre l'input utilisateur
+- **Si écrit sur le VPS** :
+  ```bash
+  ssh <vps-host> 'cd ~/ObsidianVaults/Brain && git add -A && git commit -m "journal: session Claude Code YYYY-MM-DD HHhMM — <topic>"'
+  ```
+- **Si écrit localement sur le Mac** :
+  ```bash
+  cd ~/ObsidianVaults/Brain && git add -A && git commit -m "journal: session Claude Code YYYY-MM-DD HHhMM — <topic>"
+  ```
+
+Si rien à committer ou échec, rapporte mais ne bloque pas.
+
+### 6. Afficher le contenu dans le terminal
+
+Après avoir écrit le fichier et committé, **affiche son contenu complet** dans la conversation pour preview.
+
+### 7. Attendre l'input utilisateur
 
 Termine par :
 
-> **Fichier créé : `<chemin>`**
-> Tu veux ajuster quelque chose ? (ex: "refais plus court", "enlève la section Décisions", "ajoute X"). Sinon, tape "ok" ou rien.
+> **Fichier créé + commité : `<chemin>` (`<hash-court>`)**
+> Tu veux ajuster quelque chose ? (ex: "refais plus court", "enlève la section Décisions", "ajoute X"). Sinon, tape "ok" pour pousser sur GitHub.
 
-Si l'utilisateur demande une modification, **régénère et écrase le fichier** (même chemin), puis réaffiche le nouveau contenu.
+- Si l'utilisateur demande une modification : **régénère et écrase le fichier** (même chemin), puis **amend** le commit (`git commit -a --amend --no-edit`), réaffiche le nouveau contenu et repose la question.
+- Si l'utilisateur confirme (`ok`, `oui`, `go`, `push`, etc.) : passe à l'étape 8.
+
+### 8. Push manuel après confirmation
+
+Sur le même hôte qu'à l'étape 5 :
+
+- **VPS** :
+  ```bash
+  ssh <vps-host> '~/ObsidianVaults/sync-vault.sh ~/ObsidianVaults/Brain'
+  ```
+  (le script fait pull --rebase --autostash + push ; peut créer un commit "auto: vps sync …" supplémentaire s'il détecte d'autres changements en attente — c'est normal)
+- **Mac** :
+  ```bash
+  cd ~/ObsidianVaults/Brain && git pull --rebase --autostash origin main && git push origin main
+  ```
+
+Affiche le hash court poussé et confirme que `origin/main` est à jour. Si le push échoue, rapporte l'erreur sans bloquer — le cron `sync-vault.sh` du VPS rattrapera dans les 5 min.
 
 ## Contraintes strictes
 
