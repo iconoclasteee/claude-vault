@@ -1,5 +1,13 @@
 # Contexte global — Olivier
 
+## Vault Claude PUBLIC — règles de sécurité
+
+Ce dossier est **versionné dans un repo GitHub public**. Toute création ou édition de fichier ici DOIT respecter les règles de [SECURITY.md](SECURITY.md), chargé ci-dessous.
+
+Réflexe : aucun identifiant personnel (chemin absolu contenant un username, email, hostname, alias SSH, IP, token). Utiliser les placeholders `~/`, `<user>`, `<vps-host>`, `<email>`. En cas de doute, ne pas committer.
+
+@SECURITY.md
+
 ## Profil
 - Vibe coder qui utilise Claude Code au quotidien
 - Mac + iPhone, travaille principalement en français
