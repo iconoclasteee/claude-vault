@@ -23,6 +23,6 @@ Le symlink est transparent pour Claude Code : `/nom-commande` fonctionne exactem
 
 ## Commandes actuelles
 
-- [`log-cc.md`](log-cc.md) — synthétise une session Claude Code dans le vault Brain
+- [`log-cc.md`](commands/log-cc.md) — synthétise une session Claude Code dans le vault Brain
   - Spec : [`log-cc-spec.md`](log-cc-spec.md)
   - Plan d'implémentation : [`log-cc-plan.md`](log-cc-plan.md)
