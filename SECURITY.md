@@ -1,3 +1,4 @@
+
 # Security policy — public vault hygiene
 
 This repository is intentionally public as a demonstration of a Claude Code setup. The following rules govern what must never reach a commit.
