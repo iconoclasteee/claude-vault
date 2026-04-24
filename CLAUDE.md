@@ -6,11 +6,12 @@
 - Projets : développement web (Next.js, TypeScript, Prisma, PostgreSQL)
 
 ## Vault Brain
-- Chemin : ~/Documents/Obsidian/Brain/
+- Chemin : ~/ObsidianVaults/Brain/
 - Second brain personnel (PARA + Zettelkasten + MOC)
 - Toute note créée dans Brain doit avoir le frontmatter standard (title, date, tags, status, source)
 - Utiliser les WikiLinks [[Note]] pour relier les notes entre elles
-- Les nouvelles captures vont dans Brain/Inbox/ par défaut
+- Les nouvelles captures vont dans Brain/00 Inbox/ par défaut
+- Structure : `0X` pour les flux Zettelkasten (00 Inbox, 01 Journal, 02 Briefs, 03 Notes, 04 MOC), `1X` pour PARA (11 Projets, 12 Domaines, 13 Ressources, 14 Archive). Voir `Brain/README.md` pour la doctrine complète.
 
 ## Conventions
 - Langue : français sauf si explicitement demandé en anglais
