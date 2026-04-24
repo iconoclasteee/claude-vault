@@ -15,7 +15,12 @@ git config core.hooksPath scripts/hooks
 ## Hooks present
 
 ### `pre-commit`
-Runs before each commit. Scans **added** lines in staged files against the patterns from `patterns.local`. Blocks the commit on any match. Skips itself (files under `scripts/hooks/`).
+Runs before each commit. Scans **added** lines in staged files against the patterns from `patterns.local`. Blocks the commit on any match.
+
+Excluded from the scan:
+- `scripts/hooks/*` — the hook itself
+- `skills/collections/*` — third-party skills library (may contain unrelated example IPs, emails, token prefixes)
+- `.obsidian/*` — Obsidian plugins
 
 If `patterns.local` is missing, the hook prints a setup reminder and exits 0 — it does not block commits when misconfigured.
 

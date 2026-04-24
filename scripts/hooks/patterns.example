@@ -18,3 +18,9 @@ xoxb-[A-Za-z0-9]
 xoxp-[A-Za-z0-9]
 AKIA[A-Z0-9]{16}
 BEGIN (RSA|OPENSSH|PGP) PRIVATE
+
+# --- IPv4 catch-all — blocks any IPv4 in committed diffs ---
+# The hook excludes third-party folders (skills/collections, .obsidian) so
+# these vendor examples don't trip it. If you write an IP example in your
+# own docs, use <ip> as placeholder or bypass with --no-verify after review.
+\b(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}\b

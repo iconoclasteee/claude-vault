@@ -21,6 +21,7 @@ When an example requires a value that would otherwise be personal, use a neutral
 - `~/` for home-relative paths (preferred over any absolute form)
 - `<user>` for machine usernames
 - `<host>` or `<vps-host>` for SSH aliases and hostnames
+- `<ip>` or `<host>` for IP addresses
 - `<email>` for email addresses
 - `<TOKEN>` for credentials in code samples
 
