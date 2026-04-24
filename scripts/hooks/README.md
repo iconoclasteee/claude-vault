@@ -1,33 +1,34 @@
-# Git hooks — claude-vault
+# Git hooks — public vault
 
-Hooks versionnés pour éviter qu'un identifiant personnel ne parte sur GitHub public.
+Versioned hooks to prevent personal identifiers from reaching this public repository.
 
-## Installation (une fois par clone)
+## Per-machine setup (one time per clone)
 
 ```bash
+cp scripts/hooks/patterns.example scripts/hooks/patterns.local
+# edit scripts/hooks/patterns.local with your actual sensitive values
 git config core.hooksPath scripts/hooks
 ```
 
-C'est tout. Les hooks s'exécuteront désormais automatiquement.
+`patterns.local` is gitignored, so your literal values stay on your machine.
 
-## Hooks présents
+## Hooks present
 
 ### `pre-commit`
+Runs before each commit. Scans **added** lines in staged files against the patterns from `patterns.local`. Blocks the commit on any match. Skips itself (files under `scripts/hooks/`).
 
-Tourne avant chaque commit. Scanne les lignes **ajoutées** (pas celles modifiées par ailleurs) dans les fichiers en cours de commit. Bloque si un pattern de la liste est détecté.
+If `patterns.local` is missing, the hook prints a setup reminder and exits 0 — it does not block commits when misconfigured.
 
-Patterns surveillés (éditables en haut du script) :
+## Pattern file format
 
-- Chemins persos : `<user-mac-path>`, `<user-linux-path>`, `<vps-host>`
-- Email : `<email>`
-- Tokens : `ghp_...` (GitHub), `sk-ant-...` (Anthropic), `xoxb-...` (Slack), `AKIA...` (AWS)
+- One extended regex per line
+- Lines starting with `#` or empty lines are ignored
+- Patterns are matched against `^+.*PATTERN` in the staged diff (i.e. new lines only)
 
-## Bypasser un bloquage (à éviter)
-
-Si un pattern est légitime et volontaire :
+## Bypassing the hook
 
 ```bash
 git commit --no-verify
 ```
 
-À n'utiliser qu'en connaissance de cause.
+Use only when a pattern match is a legitimate false positive and you've verified the diff manually.

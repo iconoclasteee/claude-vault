@@ -1,0 +1,20 @@
+# Patterns that block commits in this repo.
+# Copy this file to patterns.local (which is gitignored) and replace the
+# example values below with your actual sensitive strings. One extended
+# regex per line. Lines starting with # or blank lines are ignored.
+
+# --- Personal identifiers (REPLACE WITH YOUR VALUES) ---
+# /Users/<your-macos-username>
+# /home/<your-linux-username>
+# <your-ssh-alias>
+# <your\.email>@<domain>\.<tld>
+
+# --- Token prefixes — safe to keep as-is on any machine ---
+ghp_[A-Za-z0-9]
+ghs_[A-Za-z0-9]
+gho_[A-Za-z0-9]
+sk-ant-[A-Za-z0-9]
+xoxb-[A-Za-z0-9]
+xoxp-[A-Za-z0-9]
+AKIA[A-Z0-9]{16}
+BEGIN (RSA|OPENSSH|PGP) PRIVATE

@@ -1,77 +1,58 @@
-# Règles d'écriture sécurisée — Vault Claude public
+# Security policy — public vault hygiene
 
-## Contexte
+This repository is intentionally public as a demonstration of a Claude Code setup. The following rules govern what must never reach a commit.
 
-Le repo `iconoclasteee/claude-vault` est **public sur GitHub**. Tout contenu committé peut être lu, indexé, cloné, mis en cache par des outils tiers. Le repo est volontairement public (vitrine de compétence Claude Code). Cela impose une discipline d'écriture stricte.
+## Forbidden content
 
-## Règles absolues — NE JAMAIS écrire ces patterns
+The following categories are **never** to be committed to this repository:
 
-### Identifiants personnels
-- Chemin absolu Mac : `<user-mac-path>/` → utiliser `~/` (préféré) ou `/Users/<user>/` (placeholder)
-- Chemin absolu VPS : `<user-linux-path>/` → utiliser `~/` ou `/home/<user>/`
-- Username macOS nu (`<user>`) en dehors d'un chemin
-- Email : `<email>` → utiliser `<email>`
-- Prénom + nom complet associé à une machine/serveur
+- Absolute filesystem paths containing a machine username
+- Email addresses of the operator or collaborators
+- SSH aliases, resolvable hostnames, public or private IP addresses
+- API tokens, passwords, or any form of credential — even expired
+- Private key material (SSH, PGP, TLS)
+- Contents of `.env` files or equivalents
+- Names of private clients or internal projects
 
-### Infrastructure
-- Alias SSH : `<vps-host>` → utiliser `<vps-host>`
-- IPs publiques ou privées (`10.x.x.x`, `192.168.x.x`, IPs de prod)
-- Hostnames résolvables par DNS
-- Ports internes non-publics
-- Empreintes SSH / clés publiques serveur
+## Placeholders to use
 
-### Secrets — absolument jamais, même expirés
-- Tokens API : GitHub `ghp_*` `ghs_*` `gho_*`, Anthropic `sk-ant-*`, Slack `xoxb-*` `xoxp-*`, AWS `AKIA*`
-- Mots de passe, même en exemple de test
-- Clés privées : SSH (`BEGIN OPENSSH PRIVATE KEY`), PGP, TLS
-- Contenu de fichiers `.env`, `.secrets/`, `.credentials.json`
+When an example requires a value that would otherwise be personal, use a neutral placeholder:
 
-### Données sensibles par contexte
-- Noms de clients / projets privés
-- Chemins de fichiers sur serveurs non-publics
-- Adresses postales, numéros de téléphone
-- Infos financières
+- `~/` for home-relative paths (preferred over any absolute form)
+- `<user>` for machine usernames
+- `<host>` or `<vps-host>` for SSH aliases and hostnames
+- `<email>` for email addresses
+- `<TOKEN>` for credentials in code samples
 
-## Règles préventives — à appliquer AVANT écriture
+## Preventive rules
 
-1. **Pense à l'audience** : imagine un recruteur qui parcourt ton GitHub. Ce que tu écris est-il valorisant pour lui **sans rien révéler** ?
-2. **Préfère les placeholders** : `~/` avant `<user-mac-path>/`, `<vps-host>` avant `<vps-host>`, `<user>` avant `<user>` ou `ubuntu`
-3. **Les exemples de commande sont le vecteur principal de fuite** : relis toutes les commandes shell avant commit
-4. **Évite les triples corrélations** : username + email + hostname dans un même fichier = identification certaine, même si chaque élément pris isolément semble anodin
-5. **En cas de doute, abstiens-toi** : "je ne suis pas sûr que cette info doit être publique" > la committer par réflexe
+1. **Think audience**: imagine a recruiter reading this repo. Every line should be usable reference material without revealing who or where.
+2. **Audit shell examples carefully**: command blocks are the primary leak vector. Re-read every command line before commit.
+3. **Avoid triple correlation**: three weak signals in one file (username hint + handle + hostname fragment) compound into identification. Keep them apart.
+4. **When in doubt, abstain**: "I am not sure this is safe to publish" beats committing by reflex.
 
-## Garde-fous automatiques en place
+## Automated safeguards
 
-### `scripts/hooks/pre-commit`
-Hook git versionné qui bloque les commits contenant les patterns critiques. Activation par clone :
-```bash
-git config core.hooksPath scripts/hooks
-```
-Les patterns exacts sont listés en haut de `scripts/hooks/pre-commit`. Tenir cette liste à jour.
+### Pre-commit hook
+A versioned hook at `scripts/hooks/pre-commit` scans staged additions and blocks the commit if any configured pattern matches.
 
-### `.gitignore`
-Ignorer les fichiers contenant intrinsèquement des infos privées :
-- `.DS_Store` (métadonnées Finder)
-- `memory` (symlink vers `~/.claude/memory/` privé)
-- Workspace Obsidian
-- Tout fichier `.local.*`, `.secrets*`
+The hook does **not** contain the operator's literal patterns. It reads them from `scripts/hooks/patterns.local`, which is gitignored and lives only on each clone. See `scripts/hooks/README.md` for per-machine setup.
 
-## Procédure en cas de fuite accidentelle
+### Gitignore
+`.gitignore` excludes files that intrinsically contain personal state:
+- macOS Finder metadata
+- Obsidian workspace files
+- Any symlink whose target would leak a path
+- The hook's local patterns file
 
-Si un identifiant personnel est committé et pushé :
+## Recovery if a leak reaches the remote
 
-1. **Arrêter** : ne pas enchaîner d'autres commits
-2. **Corriger HEAD** : edit + `git commit --amend` ou nouveau commit
-3. **Nettoyer l'historique** : `git filter-repo --replace-text /path/to/replacements.txt --force`
-4. **Force push** : `git push --force origin main`
-5. **Noter** : ajouter le pattern à `scripts/hooks/pre-commit` si ce n'était pas couvert
+1. Stop further commits on the affected branch.
+2. Correct the current state with a new commit.
+3. Rewrite history with `git filter-repo --replace-text <file> --force` using a local list of values to scrub.
+4. Force-push to the remote. Any clone made before this step keeps the leaked content.
+5. **Rotate any credential that was exposed**. History rewriting hides the value from the public surface but does not invalidate it — bots may already have harvested it.
 
-Les tokens / secrets doivent en plus être **rotés côté provider** — le filter-repo ne les rend pas invalides, il les cache seulement.
+## Scope
 
-## À qui s'appliquent ces règles
-
-- À **Claude** quand il crée ou édite un fichier dans `~/ObsidianVaults/Claude/` (Mac) ou `~/vaults/Claude/` (VPS)
-- À **Olivier** quand il édite à la main
-- Au plugin **obsidian-git** dont les auto-commits sont soumis au pre-commit hook
-
-Ces règles ne s'appliquent **pas** à `~/ObsidianVaults/Brain/` (vault privé, repo séparé, pas public) ni à `~/.claude/memory/` (hors vault).
+These rules apply to this repository only. They do not govern private vaults or machine-local configuration, which follow their own conventions.

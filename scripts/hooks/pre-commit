@@ -1,31 +1,38 @@
 #!/usr/bin/env bash
-# Pre-commit hook — bloque les commits contenant des identifiants personnels.
+# Pre-commit hook — bloque les commits contenant des patterns sensibles locaux.
 # Activation (une fois par clone) : git config core.hooksPath scripts/hooks
+# Source des patterns : scripts/hooks/patterns.local (gitignored)
+# Setup : cp scripts/hooks/patterns.example scripts/hooks/patterns.local puis édite
 
 set -euo pipefail
 
-# Patterns interdits. Ajoute une ligne par pattern à surveiller.
-PATTERNS=(
-  '<user-mac-path>'
-  '<user-linux-path>'
-  '<vps-host>'
-  '<email>'
-  'ghp_[A-Za-z0-9]'
-  'sk-ant-[A-Za-z0-9]'
-  'xoxb-[A-Za-z0-9]'
-  'AKIA[A-Z0-9]{16}'
-)
+HOOK_DIR=$(dirname "$0")
+PATTERNS_FILE="$HOOK_DIR/patterns.local"
+
+if [ ! -f "$PATTERNS_FILE" ]; then
+  echo "⚠️  $PATTERNS_FILE introuvable — hook de sécurité inactif sur ce clone."
+  echo "   Setup : cp $HOOK_DIR/patterns.example $PATTERNS_FILE puis ajoute tes valeurs."
+  exit 0
+fi
 
 STAGED=$(git diff --cached --name-only --diff-filter=ACM)
 [ -z "$STAGED" ] && exit 0
 
+PATTERNS=()
+while IFS= read -r line; do
+  case "$line" in
+    ''|\#*) continue ;;
+  esac
+  PATTERNS+=("$line")
+done < "$PATTERNS_FILE"
+
+[ ${#PATTERNS[@]} -eq 0 ] && exit 0
+
 FOUND=0
 while IFS= read -r file; do
   [ -f "$file" ] || continue
-  # Exclut le dossier du hook et SECURITY.md qui listent les patterns par définition.
   case "$file" in
     scripts/hooks/*) continue ;;
-    SECURITY.md) continue ;;
   esac
   for pattern in "${PATTERNS[@]}"; do
     if git diff --cached -U0 -- "$file" | grep -E "^\+" | grep -E "$pattern" >/dev/null 2>&1; then

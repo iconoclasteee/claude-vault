@@ -3,3 +3,4 @@
 .obsidian/cache
 .DS_Store
 memory
+scripts/hooks/patterns.local
