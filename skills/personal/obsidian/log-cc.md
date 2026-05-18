@@ -14,12 +14,14 @@ Tu dois **synthétiser la session de conversation actuelle** (depuis son tout d�
 
 ## Étapes à exécuter
 
-### 1. Déterminer le nom de fichier cible
+### 1. Déterminer le nom de fichier cible et le contexte machine
 
 - Date : aujourd'hui, format `YYYY-MM-DD`
 - Heure : maintenant, format `HHhMM` (exemple : `17h45`)
 - Topic : selon la règle ci-dessus
 - Caractères invalides dans le topic (`/`, `:`, `\`, `*`, `?`, `"`, `<`, `>`, `|`) → remplace par `-` ou supprime
+- **Nom de la machine** : récupère via `hostname -s` (nom court)
+- **Répertoire où Claude a été lancé** : récupère via `pwd` (chemin absolu courant)
 
 Chemin final : `~/ObsidianVaults/Brain/01 Journal/Claude code/YYYY-MM-DD HHhMM — <topic>.md`
 
@@ -62,7 +64,9 @@ tags:
   - domaine/claude-code
   - domaine/meta
 status: active
-source: "session Claude Code YYYY-MM-DD HHhMM + Name of the current machine"
+source: "session Claude Code YYYY-MM-DD HHhMM"
+machine: "<hostname court>"
+repertoire: "<cwd absolu où Claude a été lancé>"
 ---
 
 # <topic>
