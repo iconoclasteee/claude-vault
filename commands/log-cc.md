@@ -36,6 +36,17 @@ Scan rapide :
 - Identifie 1 à 3 notes dont le titre est sémantiquement proche du topic
 - Si aucune note pertinente trouvée, **omet complètement la section "Liens"** du fichier final (ne mets pas de "aucune note pertinente")
 
+### 2bis. Générer les tags contextuels
+
+À partir du contenu réel de la session, construis une liste de tags selon ces règles :
+
+- **`type/fleeting`** : toujours présent (c'est un journal brut, non retravaillé).
+- **`domaine/<X>`** : 1 à 3 max. Technos ou sujets effectivement touchés dans la session (`domaine/git`, `domaine/obsidian`, `domaine/nextjs`, `domaine/ia`, `domaine/devops`, `domaine/prisma`, `domaine/claude-code`…). **Interdits** : `domaine/meta` (trop générique). N'ajoute `domaine/claude-code` que si Claude Code lui-même est le sujet (pas juste l'outil).
+- **`projet/<Y>`** : 0 à 2. Seulement si un projet précis est touché — typiquement un sous-dossier de `~/ObsidianVaults/Brain/11 Projets/` ou un repo identifiable (ex: `projet/saveurs`, `projet/brain`, `projet/vault-claude`). Si rien d'identifiable, omet.
+- **Mots-clés libres** (sans préfixe) : 0 à 3. Concepts saillants de la session en kebab-case (ex: `frontmatter`, `sync`, `hook`, `tags-system`, `hostname`). Évite les mots vides.
+
+Total visé : 3 à 7 tags. Mieux vaut peu et pertinent que beaucoup et générique.
+
 ### 3. Synthétiser la conversation en 8 sections
 
 **Ordre imposé** : Objectif utilisateur → Résumé → Décisions clés → Apprentissages → Problèmes rencontrés → À faire → Commandes importantes → Fichiers touchés.
@@ -61,8 +72,9 @@ title: "<topic>"
 date: YYYY-MM-DD
 tags:
   - type/fleeting
-  - domaine/claude-code
-  - domaine/meta
+  - domaine/<X>        # 1 à 3 tags domaine, déduits de la session (cf. règles §2bis)
+  - projet/<Y>         # 0 à 2 tags projet, uniquement si projet identifiable
+  - <mot-cle-libre>    # 0 à 3 mots-clés libres en kebab-case
 status: active
 source: "session Claude Code YYYY-MM-DD HHhMM"
 machine: "<hostname court>"
