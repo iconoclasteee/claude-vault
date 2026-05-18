@@ -5,7 +5,7 @@ argument-hint: "[topic optionnel]"
 
 # Synthèse de session Claude Code
 
-Tu dois **synthétiser la session de conversation actuelle** (depuis son tout début) et créer une note dans le vault Brain d'Olivier.
+Tu dois **synthétiser la session de conversation actuelle** (depuis son tout début ou depuis la dernière fois la commande a été lancé dans la session) et créer une note dans le vault Brain d'Olivier.
 
 ## Arguments
 
@@ -62,7 +62,7 @@ tags:
   - domaine/claude-code
   - domaine/meta
 status: active
-source: "session Claude Code YYYY-MM-DD HHhMM"
+source: "session Claude Code YYYY-MM-DD HHhMM + Name of the current machine"
 ---
 
 # <topic>
