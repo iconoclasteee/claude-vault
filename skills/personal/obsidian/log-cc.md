@@ -38,14 +38,18 @@ Scan rapide :
 
 ### 2bis. Générer les tags contextuels
 
-À partir du contenu réel de la session, construis une liste de tags selon ces règles :
+**Principe central** : un tag est un **filtre de retrieval fonctionnel**. Il doit pouvoir servir à dire « donne-moi tous les logs sur X » où X est un contexte qu'Olivier voudrait réinjecter dans une nouvelle session Claude. Tague le **quoi/pourquoi** (produit, finalité, livrable), pas le **comment** (techno d'exécution).
+
+Règles :
 
 - **`type/fleeting`** : toujours présent (c'est un journal brut, non retravaillé).
-- **`domaine/<X>`** : 1 à 3 max. Technos ou sujets effectivement touchés dans la session (`domaine/git`, `domaine/obsidian`, `domaine/nextjs`, `domaine/ia`, `domaine/devops`, `domaine/prisma`, `domaine/claude-code`…). **Interdits** : `domaine/meta` (trop générique). N'ajoute `domaine/claude-code` que si Claude Code lui-même est le sujet (pas juste l'outil).
-- **`projet/<Y>`** : 0 à 2. Seulement si un projet précis est touché — typiquement un sous-dossier de `~/ObsidianVaults/Brain/11 Projets/` ou un repo identifiable (ex: `projet/saveurs`, `projet/brain`, `projet/vault-claude`). Si rien d'identifiable, omet.
-- **Mots-clés libres** (sans préfixe) : 0 à 3. Concepts saillants de la session en kebab-case (ex: `frontmatter`, `sync`, `hook`, `tags-system`, `hostname`). Évite les mots vides.
+- **`domaine/<X>`** : 1 à 3 max. **Domaine fonctionnel pérenne** auquel la session contribue. Ex valides : `domaine/brief-ai`, `domaine/carriere`, `domaine/obsidian`, `domaine/claude-code`, `domaine/design`. **À éviter** : `domaine/git`, `domaine/nginx`, `domaine/devops`, `domaine/web`, `domaine/ia` quand ce sont des moyens et non des fins. **Interdits** : `domaine/meta` (trop générique).
+- **`projet/<Y>`** : 0 à 2. **Uniquement les projets pérennes** d'Olivier — sous-dossiers de `~/ObsidianVaults/Brain/11 Projets/` ou repos qu'il maintient (`projet/brain`, `projet/vault-claude`, `projet/briefs-pipeline`). **Jamais** pour un projet one-shot, expérimental, ou éphémère.
+- **Mots-clés libres** (sans préfixe) : 0 à 3. Tout ce qui parle fonctionnellement — noms de commandes (`log-cc`), URLs (`brief-ai.orhein.com`), finalités (`demo`, `cv`, `deploiement`), événements (`bpce-lab-ia`). **À éviter** : noms de libs, frameworks, références visuelles internes, technos.
 
-Total visé : 3 à 7 tags. Mieux vaut peu et pertinent que beaucoup et générique.
+**Test de validation** : si un tag ne te servirait pas pour retrouver ce log depuis une nouvelle session Claude dans 3 mois, jette-le. Mieux vaut 4 tags pertinents que 7 tags descriptifs.
+
+Total visé : 3 à 7 tags.
 
 ### 3. Synthétiser la conversation en 8 sections
 
