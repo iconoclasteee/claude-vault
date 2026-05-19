@@ -5,7 +5,7 @@ argument-hint: "[topic optionnel]"
 
 # Synthèse de session Claude Code
 
-Tu dois **synthétiser la session de conversation actuelle** (depuis son tout début ou depuis la dernière fois la commande a été lancé dans la session) et créer une note dans le vault Brain d'Olivier.
+Tu dois **synthétiser la session de conversation actuelle**, depuis son tout début — ou depuis le dernier appel à `/log-cc` dans cette session, si la commande a déjà été lancée — et créer une note dans le vault Brain d'Olivier.
 
 ## Arguments
 

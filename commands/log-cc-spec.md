@@ -29,7 +29,7 @@ Exemple :
 ## 🔄 Flow d'exécution
 
 1. Claude lit les instructions du fichier `log-cc.md`
-2. Claude synthétise la **conversation actuelle depuis le début** en 8 sections, dans l'ordre :
+2. Claude synthétise la **conversation actuelle depuis son tout début** — ou depuis le dernier appel à `/log-cc` dans cette session, si la commande a déjà été lancée — en 8 sections, dans l'ordre :
    - **Objectif utilisateur** (vision cible / "pourquoi système", toujours présente)
    - **Résumé** (ce qui a été fait dans la session, ton synthétique, pas "aujourd'hui", toujours présente)
    - **Décisions clés**
@@ -57,10 +57,13 @@ title: "<topic>"
 date: YYYY-MM-DD
 tags:
   - type/fleeting
-  - domaine/claude-code
-  - domaine/meta
+  - domaine/<X>        # 1 à 3 tags domaine fonctionnels, déduits de la session
+  - projet/<Y>         # 0 à 2 tags projet, uniquement si projet pérenne
+  - <mot-cle-libre>    # 0 à 3 mots-clés libres en kebab-case (commandes, URLs, finalités)
 status: active
 source: "session Claude Code YYYY-MM-DD HHhMM"
+machine: "<hostname court>"
+repertoire: "<cwd absolu où Claude a été lancé>"
 ---
 
 # <topic>
@@ -152,3 +155,6 @@ Toute nouvelle slash command doit vivre dans `~/ObsidianVaults/Claude/commands/`
 - **2026-04-24** : v1 implémentée (7 étapes, synthèse + preview + régénération).
 - **2026-04-24** : v1.1 — ajout de l'étape **Objectif utilisateur** en tête de note (8 sections au total).
 - **2026-04-24** : v1.2 — le flow passe à 9 étapes : commit automatique local immédiatement après l'écriture (étape 6), push uniquement après confirmation utilisateur (étape 9). Motivation : garder un checkpoint Git sans polluer GitHub avec des drafts non validés.
+- **2026-05-18** : v1.3 — ajout dans le frontmatter de `machine` (hostname court) et `repertoire` (cwd absolu) pour tracer l'origine de chaque session.
+- **2026-05-19** : v1.4 — refonte de la doctrine de tags : tags fonctionnels (filtres de retrieval) au lieu de tags fixes descriptifs. Voir section §2bis dans `log-cc.md`.
+- **2026-05-19** : v1.5 — la synthèse couvre désormais "depuis le tout début de la session **OU** depuis le dernier appel à `/log-cc`" si la commande a déjà été lancée dans la même session.
