@@ -20,7 +20,11 @@ description: Archive une information en mémoire persistante — écrit à la fo
 
 2. **Écrire dans `~/.claude/memory/`** via le système memory auto standard (fichier dédié + pointeur dans `MEMORY.md`). Respecter le format frontmatter `name/description/type`.
 
-3. **Pousser dans le vault** dans `~/ObsidianVaults/Brain/12 Domaines/AI/` :
+3. **Récupérer le contexte de capture** :
+   - **Machine** : `hostname -s` (nom court).
+   - **Répertoire de lancement** : le répertoire d'où la session Claude a été lancée — c'est la **clé de scope** de la mémoire de projet (`~/.claude/projects/<slug>/memory/`). L'utiliser tel qu'indiqué par le contexte de session (`Primary working directory` au démarrage), **PAS** un simple `pwd` : le cwd du shell peut avoir dérivé si une commande a fait un `cd` en cours de session. Recoupe au besoin avec le slug sous `~/.claude/projects/`.
+
+4. **Pousser dans le vault** dans `~/ObsidianVaults/Brain/12 Domaines/AI/` :
    - Vérifier d'abord s'il existe déjà une note sur le sujet (`ls` + Grep) → si oui, Edit pour appender, sinon Write une nouvelle note
    - Nommage : `YYYY-MM-DD — titre-court.md`
    - Frontmatter Brain obligatoire :
@@ -33,11 +37,13 @@ description: Archive une information en mémoire persistante — écrit à la fo
        - domaine/ia            # ou domaine pertinent
      status: active
      source: "session claude code YYYY-MM-DD"
+     machine: "<hostname court>"                       # via hostname -s
+     repertoire: "<répertoire de lancement absolu>"    # clé de scope mémoire, pas le pwd dérivé
      ---
      ```
    - Utiliser `[[WikiLinks]]` vers les notes existantes pertinentes
 
-4. **Confirmer à l'utilisateur** les deux destinations : "Mémorisé dans `~/.claude/memory/<fichier>.md` et dans `Brain/12 Domaines/AI/<fichier>.md`."
+5. **Confirmer à l'utilisateur** les deux destinations : "Mémorisé dans `~/.claude/memory/<fichier>.md` et dans `Brain/12 Domaines/AI/<fichier>.md`."
 
 ## Exemples
 

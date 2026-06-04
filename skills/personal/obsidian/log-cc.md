@@ -58,13 +58,18 @@ Total visé : 3 à 7 tags.
 **Sémantique des sections** :
 - **Objectif utilisateur** : le "pourquoi système" que poursuit Olivier à travers cette session — la **vision cible** ou le **résultat désiré** à terme (pas ce qu'on a fait techniquement — ça c'est "Résumé"). 2-5 phrases qui décrivent l'état du monde qu'Olivier veut atteindre. Reformule avec tes mots en t'appuyant sur ce qui a émergé de la conversation (besoins exprimés, contraintes, arbitrages faits). Exemple de style : "Avoir un second brain sur Obsidian accessible depuis Mac, VPS et iPhone ; avoir un vault Claude qui centralise les skills et permet de les découvrir/installer facilement via skill-advisor ; pouvoir journaliser les sessions Claude Code dans Brain."
 - **Résumé** : ce qui a été **fait** dans cette session précise (2-5 phrases, ton factuel, pas "Aujourd'hui")
-- Les 6 autres sections gardent leur sens habituel
+- **Décisions clés** : uniquement les décisions qui ont **infléchi la direction** de la session — changement d'instruction, d'objectif, de périmètre, de priorisation — **prises par Olivier ou arbitrées avec lui**. Les choix d'exécution que l'IA a faits seule en cours de route **n'ont pas leur place ici** (ils relèvent du "Résumé" s'ils comptent). Si aucune décision n'a infléchi la direction, **omets la section**.
+- **Apprentissages** : uniquement les **bonnes pratiques réutilisables** — une règle, un piège récurrent, une méthode, une contrainte non-évidente de l'environnement — que l'IA ou Olivier devrait réappliquer dans une future session. Pas les détails d'exécution propres à cette session.
+- **Problèmes rencontrés** : uniquement les problèmes dont la **leçon est durable** (piège qui se reproduira, contrainte d'environnement, faux-ami). Un bug ponctuel résolu qui ne se reproduira pas (typo, clé mal normalisée, artefact de copier-coller) **n'a pas sa place ici** : soit sa leçon généralisable remonte dans Apprentissages, soit on l'omet.
+- Les 4 autres sections gardent leur sens habituel
 
 **Règles de style :**
 - Ton **synthétique**, factuel, professionnel
 - **Ne jamais** commencer le résumé par "Aujourd'hui"
 - Si une section n'a rien à dire, **omet-la complètement** (pas de placeholder vide). Exception : "Objectif utilisateur" et "Résumé" sont toujours présentes
 - Frontmatter obligatoire (cf. template)
+
+**Test de capitalisation (Apprentissages + Problèmes)** : avant d'écrire une puce, demande-toi « dans 3 mois, l'IA ou moi ferions-nous différemment / éviterions-nous une erreur grâce à cette ligne ? ». Si non → jette-la. Mieux vaut **0 puce** qu'une puce de bruit ; ces deux sections s'omettent complètement si rien ne passe le test.
 
 ### 4. Écrire le fichier
 
@@ -94,16 +99,16 @@ repertoire: "<cwd absolu où Claude a été lancé>"
 <2 à 5 phrases synthétiques, ton factuel, sans commencer par "Aujourd'hui">
 
 ## Décisions clés
-- <décision> parce que <raison> (rejeté <alternative> car <raison>)
+- <décision qui a infléchi la direction (instruction/objectif/périmètre/priorité), prise ou arbitrée avec Olivier> parce que <raison> (rejeté <alternative> car <raison>)
 - ...
 
 ## Apprentissages
-- <ce qu'Olivier a appris, technique ou méthodo>
+- <bonne pratique réutilisable / piège récurrent / méthode — réapplicable en future session>
 - ...
 
 ## Problèmes rencontrés
-- **<description du problème>**
-  - **Solution** : <ce qui a marché>
+- **<problème dont la leçon est durable — piège qui se reproduira, contrainte d'env.>**
+  - **Solution** : <ce qui a marché, formulé comme règle réutilisable>
 - ...
 
 ## À faire
