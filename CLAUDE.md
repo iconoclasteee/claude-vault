@@ -11,7 +11,11 @@ Réflexe : aucun identifiant personnel (chemin absolu contenant un username, ema
 ## Profil
 - Vibe coder qui utilise Claude Code au quotidien
 - Mac + iPhone, travaille principalement en français
-- Projets : développement web (Next.js, TypeScript, Prisma, PostgreSQL)
+
+## Démarrage d'un nouveau projet — choix de stack délibéré
+Ne pars jamais par défaut sur la stack mainstream (Node/Next…) sans poser la question.
+Fais d'abord étudier/arbitrer avec Olivier les pistes qu'il veut évaluer (rien n'est figé) :
+Web/SaaS · TanStack Start + Convex + Better Auth — Mobile · React Native + Convex — Desktop · Tauri / Electron.
 
 ## Vault Brain
 - Chemin : ~/ObsidianVaults/Brain/
