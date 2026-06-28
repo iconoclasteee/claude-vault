@@ -22,6 +22,15 @@ Tu dois **synthétiser la session de conversation actuelle**, depuis son tout d�
 - Caractères invalides dans le topic (`/`, `:`, `\`, `*`, `?`, `"`, `<`, `>`, `|`) → remplace par `-` ou supprime
 - **Nom de la machine** : récupère via `hostname -s` (nom court)
 - **Répertoire où Claude a été lancé** : récupère via `pwd` (chemin absolu courant)
+- **Nom de session Claude** (= exactement ce qu'affiche `claude -r`) : c'est le dernier titre `aiTitle` du journal de session, retrouvé via `$CLAUDE_CODE_SESSION_ID`. ⚠️ Ce fichier vit dans le vault **public** → n'écris **aucun** chemin absolu avec username, UUID ou slug en dur ; utilise les variables :
+  ```bash
+  SID="$CLAUDE_CODE_SESSION_ID"
+  SFILE=$(find "$HOME/.claude/projects" -name "$SID.jsonl" 2>/dev/null | head -1)
+  SESSION_NAME=$(grep '"type":"ai-title"' "$SFILE" 2>/dev/null | tail -1 \
+    | python3 -c 'import sys,json;print(json.loads(sys.stdin.read()).get("aiTitle",""))' 2>/dev/null)
+  [ -z "$SESSION_NAME" ] && SESSION_NAME="session Claude Code"   # repli si pas de titre
+  ```
+  `$SESSION_NAME` et `$SID` alimenteront le champ `session:` du frontmatter (étape 4).
 
 Chemin final : `~/ObsidianVaults/Brain/01 Journal/Claude code/YYYY-MM-DD HHhMM — <topic>.md`
 
@@ -85,7 +94,7 @@ tags:
   - projet/<Y>         # 0 à 2 tags projet, uniquement si projet identifiable
   - <mot-cle-libre>    # 0 à 3 mots-clés libres en kebab-case
 status: active
-source: "session Claude Code YYYY-MM-DD HHhMM"
+session: "<$SESSION_NAME> — YYYY-MM-DD HHhMM (<$CLAUDE_CODE_SESSION_ID>)"   # nom claude -r — date heure (ID technique) ; cf. étape 1
 machine: "<hostname court>"
 repertoire: "<cwd absolu où Claude a été lancé>"
 ---
@@ -129,17 +138,22 @@ repertoire: "<cwd absolu où Claude a été lancé>"
 - [[<Note existante 2>]] — <pourquoi pertinente>
 ```
 
-### 5. Commit automatique immédiat (pas de push)
+### 5. Commit local ciblé (pas de push)
 
-Juste après l'écriture du fichier, commit **localement** sans push, sur l'hôte où le fichier a été écrit :
+Détecte d'abord si **Obsidian est ouvert** (il gère alors l'auto-sync git du vault — cela conditionne la clôture, étapes 7/8) :
+```bash
+pgrep -x Obsidian >/dev/null && OBSIDIAN=ouvert || OBSIDIAN=fermé
+```
 
-- **Si écrit sur le VPS** :
-  ```bash
-  ssh <vps-host> 'cd ~/ObsidianVaults/Brain && git add -A && git commit -m "journal: session Claude Code YYYY-MM-DD HHhMM — <topic>"'
-  ```
+Puis commit **localement** sans push, sur l'hôte où le fichier a été écrit. ⚠️ Ajoute **uniquement LA note** (jamais `git add -A`, qui embarquerait des fichiers sans rapport — ex. `.bak` du vault) :
+
 - **Si écrit localement sur le Mac** :
   ```bash
-  cd ~/ObsidianVaults/Brain && git add -A && git commit -m "journal: session Claude Code YYYY-MM-DD HHhMM — <topic>"
+  cd ~/ObsidianVaults/Brain && git add -- "01 Journal/Claude code/<nom du fichier>.md" && git commit -m "journal: <$SESSION_NAME> — YYYY-MM-DD HHhMM — <topic>"
+  ```
+- **Si écrit sur le VPS** :
+  ```bash
+  ssh <vps-host> 'cd ~/ObsidianVaults/Brain && git add -- "01 Journal/Claude code/<nom du fichier>.md" && git commit -m "journal: <$SESSION_NAME> — YYYY-MM-DD HHhMM — <topic>"'
   ```
 
 Si rien à committer ou échec, rapporte mais ne bloque pas.
@@ -148,29 +162,44 @@ Si rien à committer ou échec, rapporte mais ne bloque pas.
 
 Après avoir écrit le fichier et committé, **affiche son contenu complet** dans la conversation pour preview.
 
-### 7. Attendre l'input utilisateur
+### 7. Clôture — selon qu'Obsidian est ouvert ou non
+
+**Le comportement de fin dépend de `$OBSIDIAN` (déterminé à l'étape 5).**
+
+#### Cas A — Obsidian est OUVERT (auto-sync actif → PAS de push manuel)
+
+Le plugin Obsidian Git committe et **pousse automatiquement** en arrière-plan. Ne demande donc **pas** « tape ok pour pousser ». Termine par :
+
+> **Note créée et commitée : `<chemin>` (`<hash-court>`).**
+> Obsidian est ouvert → Obsidian Git la **poussera automatiquement** sur GitHub, rien à faire.
+> Tu veux ajuster quelque chose ? (ex : « refais plus court », « enlève la section Décisions »).
+
+- Si l'utilisateur demande une modification : **réécris le fichier**, puis fais un **nouveau commit ciblé** (`git add -- "<note>" && git commit -m "…"`) — **jamais d'`amend`** ici (HEAD bouge à cause de l'auto-commit Obsidian, l'amend se collerait sur un commit « vault backup »). Réaffiche et repose la question.
+- **Il n'y a pas d'étape 8** dans ce cas.
+
+#### Cas B — Obsidian est FERMÉ (push manuel sur confirmation)
 
 Termine par :
 
 > **Fichier créé + commité : `<chemin>` (`<hash-court>`)**
-> Tu veux ajuster quelque chose ? (ex: "refais plus court", "enlève la section Décisions", "ajoute X"). Sinon, tape "ok" pour pousser sur GitHub.
+> Tu veux ajuster quelque chose ? Sinon, tape « ok » pour pousser sur GitHub.
 
-- Si l'utilisateur demande une modification : **régénère et écrase le fichier** (même chemin), puis **amend** le commit (`git commit -a --amend --no-edit`), réaffiche le nouveau contenu et repose la question.
-- Si l'utilisateur confirme (`ok`, `oui`, `go`, `push`, etc.) : passe à l'étape 8.
+- Si modification demandée : **régénère et écrase le fichier**, puis **amend** (`git commit -a --amend --no-edit`), réaffiche, repose la question.
+- Si l'utilisateur confirme (`ok`, `oui`, `go`, `push`…) : passe à l'étape 8.
 
-### 8. Push manuel après confirmation
+### 8. Push manuel (uniquement cas B — Obsidian fermé)
 
 Sur le même hôte qu'à l'étape 5 :
 
-- **VPS** :
-  ```bash
-  ssh <vps-host> '~/ObsidianVaults/sync-vault.sh ~/ObsidianVaults/Brain'
-  ```
-  (le script fait pull --rebase --autostash + push ; peut créer un commit "auto: vps sync …" supplémentaire s'il détecte d'autres changements en attente — c'est normal)
 - **Mac** :
   ```bash
   cd ~/ObsidianVaults/Brain && git pull --rebase --autostash origin main && git push origin main
   ```
+- **VPS** :
+  ```bash
+  ssh <vps-host> '~/ObsidianVaults/sync-vault.sh ~/ObsidianVaults/Brain'
+  ```
+  (le script fait pull --rebase --autostash + push ; peut créer un commit "auto: vps sync …" — c'est normal)
 
 Affiche le hash court poussé et confirme que `origin/main` est à jour. Si le push échoue, rapporte l'erreur sans bloquer — le cron `sync-vault.sh` du VPS rattrapera dans les 5 min.
 
