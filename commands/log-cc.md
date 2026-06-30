@@ -162,6 +162,20 @@ Si rien à committer ou échec, rapporte mais ne bloque pas.
 
 Après avoir écrit le fichier et committé, **affiche son contenu complet** dans la conversation pour preview.
 
+### 6bis. Réflexe de formalisation (nudge — non bloquant)
+
+À partir des sections **Fichiers touchés** et **À faire** et du `repertoire`, évalue si la session a produit un **artefact durable destiné à être réutilisé** : un script, une commande, un outil — OU un livrable (analyse, rapport, pptx, excel).
+
+Si oui, vérifie s'il est **déjà formalisé** :
+- code → vit dans un `~/dev/<nom>/` versionné (présence d'un `.git` + `README.md`), ou
+- il existe une fiche `~/ObsidianVaults/Brain/11 Projets/<nom>/`.
+
+**Signal simple** : si tu n'as pas pu poser de tag `projet/<Y>` valide (étape 2bis) alors que la session a clairement produit un keeper → c'est qu'il n'est pas formalisé.
+
+- **Keeper non formalisé détecté** → ajoute cet encart au message de clôture (étape 7/8) :
+  > 🗂️ **Formalisation** — cette session a produit `<artefact>`, sans fiche projet. Pour le garder trouvable : lance **`/formalise-projet`**.
+- **Sinon** (pas de keeper, ou déjà formalisé) → **n'ajoute rien**. Ce réflexe ne bloque jamais la clôture et reste silencieux par défaut.
+
 ### 7. Clôture — selon qu'Obsidian est ouvert ou non
 
 **Le comportement de fin dépend de `$OBSIDIAN` (déterminé à l'étape 5).**
