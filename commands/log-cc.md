@@ -76,10 +76,13 @@ Total visé : 3 à 7 tags.
 **Règles de style :**
 - Ton **synthétique**, factuel, professionnel
 - **Ne jamais** commencer le résumé par "Aujourd'hui"
-- Si une section n'a rien à dire, **omet-la complètement** (pas de placeholder vide). Exception : "Objectif utilisateur" et "Résumé" sont toujours présentes
+- Si une section n'a rien à dire, **omet-la complètement** (pas de placeholder vide). Exception : "Point de reprise", "Objectif utilisateur" et "Résumé" sont toujours présentes
+- **Calibrage longueur selon le sujet** : un **one-shot** / petit sujet peut se réduire à Point de reprise + Objectif + Résumé + Apprentissages + À faire — ne pas gonfler une petite session avec de la machinerie. Une **note d'arc** (sujet qui continuera sur d'autres sessions) doit avoir un Point de reprise **auto-suffisant**.
 - Frontmatter obligatoire (cf. template)
 
 **Test de capitalisation (Apprentissages + Problèmes)** : avant d'écrire une puce, demande-toi « dans 3 mois, l'IA ou moi ferions-nous différemment / éviterions-nous une erreur grâce à cette ligne ? ». Si non → jette-la. Mieux vaut **0 puce** qu'une puce de bruit ; ces deux sections s'omettent complètement si rien ne passe le test.
+
+**Test de reprise à froid (avant d'écrire la note)** : relis-la comme si tu étais un Claude **vierge** n'ayant QUE cette note — sans la session, sans pouvoir ouvrir les `[[Liens]]`. Pourrais-tu reprendre le sujet : savoir **quel artefact**, **où il en est**, **quelle est la prochaine action** ? Si une dépendance critique n'est que dans un lien ou implicite dans la session → **inline-la dans "Point de reprise"**. C'est le test qui prime, parce que `cload` redémarre une session sur la seule base de cette note.
 
 ### 4. Écrire le fichier
 
@@ -102,11 +105,14 @@ repertoire: "<cwd absolu où Claude a été lancé>"
 
 # <topic>
 
+## Point de reprise
+<2 à 4 lignes pour une reprise à froid : artefact(s) de travail + chemin · version / état courant au terme de la session · le fait ou la structure clé sans lequel on ne peut pas reprendre (inliné, jamais délégué à un [[Lien]])>
+
 ## Objectif utilisateur
-<2 à 5 phrases décrivant la vision cible / résultat désiré par Olivier — le "pourquoi système" de la session, pas le "quoi on a fait">
+<2 à 5 phrases décrivant la vision cible / résultat désiré par Olivier — le "pourquoi système" de la session. Vision pure : pas d'état concret ici (il va dans Point de reprise), pas le "quoi on a fait" (ça c'est Résumé)>
 
 ## Résumé
-<2 à 5 phrases synthétiques, ton factuel, sans commencer par "Aujourd'hui">
+<2 à 5 phrases synthétiques, ton factuel, sans commencer par "Aujourd'hui", sans télémétrie d'exécution (hash/octets/horodatage)>
 
 ## Décisions clés
 - <décision qui a infléchi la direction (instruction/objectif/périmètre/priorité), prise ou arbitrée avec Olivier> parce que <raison> (rejeté <alternative> car <raison>)
