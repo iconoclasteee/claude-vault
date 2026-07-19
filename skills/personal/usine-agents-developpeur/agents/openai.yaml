@@ -1,0 +1,4 @@
+interface:
+  display_name: "Usine agents développeur"
+  short_description: "Dimensionner et sécuriser une orchestration de dev"
+  default_prompt: "Utilise $usine-agents-developpeur pour préparer cette orchestration de développement."

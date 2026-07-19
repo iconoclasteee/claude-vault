@@ -17,6 +17,8 @@ source: ""
 | **Skill Advisor** ⭐ | [[skills/personal/skill-advisor/SKILL]] | Trouve et déclare les skills adaptés à un projet — chargé globalement |
 | **/souviens-toi** ⭐ | [[skills/personal/Memoire-Claude/souviens-toi/SKILL]] | Archive une info dans `~/.claude/memory/` + `Brain/12 Domaines/AI/` — chargée globalement |
 | **/rappelle-toi** ⭐ | [[skills/personal/Memoire-Claude/rappelle-toi/SKILL]] | Recharge du contexte depuis le vault (liste, mot-clé, ou chemins) — chargée globalement |
+| **Usine agents développeur** ⭐ | [[skills/personal/usine-agents-developpeur/SKILL]] | Dimensionne l’orchestration par le risque, isole les ressources et définit les preuves avant dispatch |
+| **/rex** ⭐ | [[skills/personal/rex/SKILL]] | Capitalise les incidents en REX contextualisés, validés et non prescriptifs |
 | Recherche vault | [[skills/personal/obsidian/cherche]] | Cherche dans le vault Brain via Grep |
 | Nouvelle note | [[skills/personal/obsidian/nouvelle-note]] | Crée une note Brain avec frontmatter standard |
 | Résumé session | [[skills/personal/obsidian/resume-session]] | Génère un résumé structuré de session |

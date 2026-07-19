@@ -1,0 +1,4 @@
+interface:
+  display_name: "REX développement"
+  short_description: "Capitaliser les incidents sans créer de dogmes"
+  default_prompt: "Utilise $rex pour tirer un retour d’expérience de ce chantier."
