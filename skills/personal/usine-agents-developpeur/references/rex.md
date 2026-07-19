@@ -64,6 +64,21 @@ Confiance : `faible`, `moyenne`, `élevée`.
 - **Enseignement :** distinguer observation, hypothèse, facteur contributif et cause
   confirmée par reproduction ou expérience comparative.
 
+## REX-007 — Le coût de coordination peut dépasser le risque couvert
+
+- **Déclencheur :** le workflow prévoit plusieurs agents, revues, re-revues ou
+  handoffs pour des tâches locales ou facilement réversibles.
+- **Exclusions :** sécurité, migration destructive, données sensibles, logique métier
+  critique ou exigence réglementaire justifiant cette séparation.
+- **Statut :** candidate
+- **Confiance :** moyenne
+- **Enseignement :** avant d’exécuter un pipeline proposé, comparer son coût de
+  coordination aux risques concrets qu’il couvre et proposer une version plus simple.
+- **Signal observable :** davantage de relances, rapports, attentes et reprises
+  d’état que de modifications ou de validations utiles.
+- **Limite :** le nombre d’étapes ne suffit pas à conclure ; une tâche courte peut
+  néanmoins exiger une séparation forte des responsabilités.
+
 ## Maintenance
 
 Lors d’un REX :

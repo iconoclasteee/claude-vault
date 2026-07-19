@@ -5,9 +5,19 @@ description: Préparer et encadrer une activité de développement de code confi
 
 # Usine à agents — développement
 
-Avant le premier dispatch, produire les cinq sorties ci-dessous. Ne pas recopier
-les références entières dans les briefs : n’injecter que les décisions et points
-de vigilance applicables.
+Avant le premier dispatch, passer le test de nécessité puis produire les cinq
+sorties ci-dessous. Ne pas recopier les références entières dans les briefs :
+n’injecter que les décisions et points de vigilance applicables.
+
+## 0. Test de nécessité
+
+Avant de dimensionner : quel risque concret le dispositif couvre-t-il, et le coût
+de coordination reste-t-il inférieur au coût probable des erreurs qu’il prévient ?
+Si non, proposer le pipeline minimal couvrant les risques prioritaires. Ne jamais
+orchestrer un pipeline complexe au seul motif que l’utilisateur l’a décrit ainsi —
+une description détaillée n’est pas un arbitrage explicite. Le résultat de ce test
+s’intègre à la justification du niveau d’orchestration (sortie 1) ; il ne constitue
+pas une sortie supplémentaire.
 
 ## 1. Niveau d’orchestration
 
