@@ -79,6 +79,24 @@ Confiance : `faible`, `moyenne`, `élevée`.
 - **Limite :** le nombre d’étapes ne suffit pas à conclure ; une tâche courte peut
   néanmoins exiger une séparation forte des responsabilités.
 
+## REX-008 — Comparer les familles de solutions avant d'adopter un composant
+
+- **Déclencheur :** adoption d'un composant tiers pour répondre à une demande
+  formulée avec un nom de solution.
+- **Exclusions :** composant imposé par une contrainte explicite (existant, standard
+  interne, exigence contractuelle) ; besoin trivial et jetable.
+- **Statut :** candidate
+- **Confiance :** moyenne
+- **Enseignement :** une demande nomme un besoin, pas un véhicule. Comparer les
+  familles de solutions avant d'installer le premier composant trouvé, et avant
+  d'écrire le premier correctif sur celui qui a été retenu.
+- **Signal observable :** vivier quasi vide dans la famille explorée ; correctif
+  nécessaire avant tout usage réel.
+- **Preuve attendue :** au moins deux familles énumérées et le critère qui les
+  départage, avant l'installation.
+- **Limite :** un vivier pauvre peut refléter une niche réellement peu peuplée et
+  non une erreur de famille ; le signal rouvre le choix, il ne le tranche pas.
+
 ## Maintenance
 
 Lors d’un REX :
