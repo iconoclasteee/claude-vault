@@ -28,7 +28,7 @@ source: ""
 
 ## Obsidian Skills — dans Brain vault
 
-> Ces skills sont chargés automatiquement quand Claude Code est lancé depuis `~/Documents/Obsidian/Brain/`
+> Ces skills sont chargés automatiquement quand Claude Code est lancé depuis `~/ObsidianVaults/Brain/`
 
 | Skill | Rôle |
 |-------|------|
@@ -92,5 +92,5 @@ Utiliser pour créer de nouveaux skills : voir `documentation/` et `claude-skill
 
 Pour utiliser un skill depuis une collection, référencer son chemin dans le CLAUDE.md du projet :
 ```
-@~/Documents/Obsidian/Claude/skills/collections/development/security/owasp/SKILL.md
+@~/ObsidianVaults/Claude/skills/collections/development/security/owasp/SKILL.md
 ```

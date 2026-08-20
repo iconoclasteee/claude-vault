@@ -30,7 +30,7 @@ If the goal isn't clear, ask: "Pour quel besoin ou tâche ?"
 
 Search simultaneously across all three sources:
 
-**Source A — Local library** (`~/Documents/Obsidian/Claude/skills/`)
+**Source A — Local library** (`~/ObsidianVaults/Claude/skills/`)
 - Read `INDEX.md` for quick overview
 - Grep `collections/` for SKILL.md files matching keywords
 
@@ -61,7 +61,7 @@ skilluse search <keyword>
 
 ── Source : librairie locale ──
   [5] owasp              — Security audit OWASP
-      ~/Documents/Obsidian/Claude/skills/collections/development/security/owasp/SKILL.md
+      ~/ObsidianVaults/Claude/skills/collections/development/security/owasp/SKILL.md
 ```
 
 Ask: "Tu veux lire le contenu d'un skill avant de choisir ? (indique le numéro)"
@@ -93,8 +93,8 @@ skilluse install <name>            # global: ~/.claude/skills/
 **Option B — via CLAUDE.md reference** (for local library skills):
 Add to project `CLAUDE.md`:
 ```
-@~/Documents/Obsidian/Claude/skills/collections/<path>/SKILL.md
-@~/Documents/Obsidian/Claude/skills/collections/<path>/references/<file>.md
+@~/ObsidianVaults/Claude/skills/collections/<path>/SKILL.md
+@~/ObsidianVaults/Claude/skills/collections/<path>/references/<file>.md
 ```
 
 Always include `references/` files that the SKILL.md cites (check for `references/` folder).
@@ -107,11 +107,11 @@ Confirm: "Skill actif. Il sera chargé à la prochaine session Claude Code dans 
 
 After every install, always copy the skill to the personal library without asking.
 
-1. Create folder: `~/Documents/Obsidian/Claude/skills/personal/<skill-name>/`
+1. Create folder: `~/ObsidianVaults/Claude/skills/personal/<skill-name>/`
 2. Copy SKILL.md (and references/ if any) into it
 3. Commit and push:
 ```bash
-cd ~/Documents/Obsidian/Claude
+cd ~/ObsidianVaults/Claude
 git add skills/personal/<skill-name>/
 git commit -m "feat: add <skill-name> to personal skills"
 git push
